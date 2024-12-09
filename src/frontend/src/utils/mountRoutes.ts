@@ -7,7 +7,7 @@ type PageInfo = {
   children?: PageInfo[]; // Representa páginas, layouts ou subpastas
 };
 
-const analyzePagesFolder = (pagesFolderPath: string): PageInfo[] => {
+export const analyzePagesFolder = (pagesFolderPath: string): PageInfo[] => {
   function processDirectory(directory: string, parentPath: string): PageInfo[] {
     const items = fs.readdirSync(directory);
     const result: PageInfo[] = [];
@@ -73,5 +73,6 @@ const analyzePagesFolder = (pagesFolderPath: string): PageInfo[] => {
 
 // Exemplo de uso
 const pagesFolderPath = path.join(__dirname, "src", "pages");
+const result = analyzePagesFolder(pagesFolderPath);
 
-export const routes = analyzePagesFolder(pagesFolderPath);
+console.log(JSON.stringify(result, null, 2));

@@ -7,8 +7,17 @@ import { routes } from "./routes";
 import { LayoutTemplate } from "./components/templates/LayoutTemplate";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthProvider } from "./contexts/AuthContext";
+import { LoginPage } from "./components/pages/Login";
 
 const App: React.FC = () => {
+  const renderRoutes = (routes: any[]) => {
+    return routes.map(({ path, component: Component, children }, index) => (
+      <Route key={index} path={path} element={Component && <Component />}>
+        {children && renderRoutes(children)}
+      </Route>
+    ));
+  };
+
   return (
     <Router>
       <ConfigProvider direction="ltr" theme={theme}>
@@ -28,19 +37,11 @@ const App: React.FC = () => {
           <Routes>
             {/* Rotas com template */}
             <Route path="/" element={<LayoutTemplate />}>
-              {routes.withTemplate.map(
-                ({ path, component: Component }, index) => (
-                  <Route key={index} path={path} element={<Component />} />
-                )
-              )}
+              {renderRoutes(routes)}
             </Route>
 
             {/* Rotas sem template */}
-            {routes.withoutTemplate.map(
-              ({ path, component: Component }, index) => (
-                <Route key={index} path={path} element={<Component />} />
-              )
-            )}
+            <Route key="login-key" path="/login" element={<LoginPage />} />
           </Routes>
         </AuthProvider>
       </ConfigProvider>
