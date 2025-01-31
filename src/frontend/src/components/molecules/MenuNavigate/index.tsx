@@ -1,11 +1,13 @@
 import { Menu, MenuProps } from "antd";
 import { menuItems } from "./menuItems";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useMemo } from "react";
+import { useContext, useMemo } from "react";
+import { AuthContext } from "@/contexts/AuthContext";
 
 export const MenuNavigate: React.FC<MenuProps> = ({ ...rest }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const {user} = useContext(AuthContext);
 
   const activePath = useMemo(() => {
     const path = location.pathname;
@@ -23,7 +25,7 @@ export const MenuNavigate: React.FC<MenuProps> = ({ ...rest }) => {
       theme="light"
       mode="inline"
       selectedKeys={[activePath]}
-      items={menuItems}
+      items={user?.role !== "ROLE_ORG" ? menuItems?.filter((item) => item?.key !== "/gestor") : menuItems}
       onClick={handleMenuClick}
       style={{ borderInlineEnd: "none" }}
       {...rest}
