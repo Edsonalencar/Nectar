@@ -1,4 +1,4 @@
-import { Auth, Profile, Role, User, UserStatus } from "./authTypes";
+import { Profile, User, UserStatus } from "./authTypes";
 
 export enum JobsStatus {
   CONCLUDED = "CONCLUDED",

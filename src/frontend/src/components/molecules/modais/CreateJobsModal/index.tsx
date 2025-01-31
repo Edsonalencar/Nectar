@@ -4,7 +4,7 @@ import { Flex, Form, Modal, Typography } from "antd";
 
 import { LoadingContent } from "@/components/atoms/LoadingContent";
 
-import { Beekeeper, Job } from "@/types/entitysType";
+import { Job } from "@/types/entitysType";
 import { CreateJobDTO, PostProcessingDTO } from "@/services/JobsService/dtos";
 import { JobsService } from "@/services/JobsService/service";
 import { JobForm } from "@/components/organisms/JobForm";
@@ -34,7 +34,7 @@ export const CreateJobsModal = ({
   const create = async (data: CreateJobDTO) => {
     try {
       setLoading(true);
-      const res = JobsService.create(data);
+      await JobsService.create(data);
       if (reload) await reload();
       closeModal();
     } catch (error) {
@@ -70,9 +70,8 @@ export const CreateJobsModal = ({
       const postProcessing = {
         ...postProcessingValue,
         postProcessingWeight: postProcessingValue.postProcessingWeight!!,
-        postProcessingRevenue:
-          postProcessingValue.postProcessingRevenue!!,
-        waste: postProcessingValue.waste!! ,
+        postProcessingRevenue: postProcessingValue.postProcessingRevenue!!,
+        waste: postProcessingValue.waste!!,
       };
 
       formValue.postProcessing = postProcessing;

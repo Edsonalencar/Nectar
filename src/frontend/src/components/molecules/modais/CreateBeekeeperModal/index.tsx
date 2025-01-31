@@ -5,7 +5,6 @@ import { Flex, Form, Modal, Typography } from "antd";
 import { LoadingContent } from "@/components/atoms/LoadingContent";
 
 import { Beekeeper } from "@/types/entitysType";
-import { ManagerService } from "@/services/managerService/service";
 import { UserForm } from "@/components/organisms/UserForm";
 import { UserType } from "@/types";
 import { Profile } from "@/types/authTypes";
@@ -35,7 +34,7 @@ export const CreateBeekeeperModal = ({
   const create = async (data: UserType) => {
     try {
       setLoading(true);
-      const res = await BeekeepersService.create(data);
+      await BeekeepersService.create(data);
       if (reload) await reload();
       closeModal();
     } catch (error) {

@@ -3,7 +3,7 @@ import { FC } from "react";
 import { InputNumber } from "antd";
 import type { InputNumberProps } from "antd/lib/input-number";
 
-interface IProps
+export interface IProps
   extends Omit<InputNumberProps, "decimalSeparator" | "addonAfter"> {
   unit?: "R$" | "Kg" | "R$/MWh" | "%" | "R$/kW";
 }

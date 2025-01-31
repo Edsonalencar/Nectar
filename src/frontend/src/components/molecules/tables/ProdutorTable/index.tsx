@@ -1,4 +1,4 @@
-import { Beekeeper, Manager } from "@/types/entitysType";
+import { Beekeeper } from "@/types/entitysType";
 import { formatPhone } from "@/utils/formaters/format";
 import { Table, TableProps, Typography } from "antd";
 import { ColumnProps } from "antd/es/table";

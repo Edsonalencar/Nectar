@@ -34,7 +34,7 @@ export const CreateManagerModal = ({
 
     try {
       setLoading(true);
-      const res = ManagerService.create(formData);
+      await ManagerService.create(formData);
       if (reload) await reload();
       closeModal();
     } catch (error) {
