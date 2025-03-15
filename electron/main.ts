@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, session } from "electron";
 import path from "node:path";
 
 let mainWindow: BrowserWindow | null = null;
@@ -14,7 +14,19 @@ app.whenReady().then(() => {
   });
 
   mainWindow.webContents.openDevTools();
-  
+
+  // 🚀 Define a política de segurança no Electron
+  session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+    callback({
+      responseHeaders: {
+        ...details.responseHeaders,
+        "Content-Security-Policy": [
+          "default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;",
+        ],
+      },
+    });
+  });
+
   // Carregar o React buildado
   mainWindow.loadFile(path.join(__dirname, "../../dist/index.html"));
 
