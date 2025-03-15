@@ -51,7 +51,7 @@ export const PostProcessingForm = ({
             ]}
           >
             <InputMoney
-              placeholder="Kg resíduo"
+              placeholder="00,00"
               unit="Kg"
               style={{ width: "100%" }}
               onChange={handleResidueChange}
@@ -65,7 +65,7 @@ export const PostProcessingForm = ({
             key="postProcessingWeight"
           >
             <InputMoney
-              placeholder="Peso após remoção do resíduo"
+              placeholder="00,00"
               unit="Kg"
               style={{ width: "100%" }}
               disabled
@@ -79,7 +79,7 @@ export const PostProcessingForm = ({
             key="postProcessingRevenue"
           >
             <InputMoney
-              placeholder="Peso total arrecadado (20%)"
+              placeholder="00,00"
               unit="Kg"
               style={{ width: "100%" }}
               disabled
@@ -93,7 +93,7 @@ export const PostProcessingForm = ({
             key="postProcessingDelivered"
           >
             <InputMoney
-              placeholder="Peso para o produtor (80%)"
+              placeholder="00,00"
               unit="Kg"
               style={{ width: "100%" }}
               disabled

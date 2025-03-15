@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import { AiFillEdit } from "react-icons/ai";
 import { useNavigate, useParams } from "react-router-dom";
 import { PlusOutlined } from "@ant-design/icons";
+import { BeekeeperDescription } from "@/components/molecules/Descriptions/BeekeeperDescription";
 
 export const ViewBeekeeperPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -80,6 +81,8 @@ export const ViewBeekeeperPage: React.FC = () => {
     if (id) fetchResource(id);
   }, [id]);
 
+  if (!resource) return <LoadingContent isLoading />;
+
   return (
     <>
       <LoadingContent isLoading={resourceLoading} />
@@ -88,7 +91,7 @@ export const ViewBeekeeperPage: React.FC = () => {
         <ToBack />
         <Card>
           <Flex gap={20} vertical>
-            <ProfileWitchEmailDescription
+            <BeekeeperDescription
               tittle={
                 <Flex gap={16} justify="space-between">
                   <Typography.Title level={5}>Apicultores</Typography.Title>
@@ -102,11 +105,9 @@ export const ViewBeekeeperPage: React.FC = () => {
                   </Button>
                 </Flex>
               }
-              data={{
-                ...resource?.profile,
-                ...resource,
-              }}
+              data={resource}
             />
+
             {resource?.profile?.address && (
               <AddressDescription address={resource?.profile?.address} />
             )}

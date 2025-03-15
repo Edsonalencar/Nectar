@@ -98,3 +98,14 @@ export const userStatusSerialize = (value?: UserStatus) => {
       return "Ativo";
   }
 };
+
+export const booleanSerializer = (value?: Boolean) => {
+  switch (value) {
+    case true:
+      return "Sim";
+    case false:
+      return "Não";
+    default:
+      return "Desconhecido";
+  }
+};
