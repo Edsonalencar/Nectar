@@ -27,8 +27,20 @@ app.whenReady().then(() => {
     });
   });
 
-  // Carregar o React buildado
-  mainWindow.loadFile(path.join(__dirname, "../../dist/index.html"));
+  // 🚀 Verificar caminho do `index.html`
+  const indexPath = path.join(__dirname, "../../dist/index.html");
+  console.log("Carregando arquivo:", indexPath);
+
+  // 🚀 Tentar carregar o frontend
+  mainWindow.loadFile(indexPath).catch((err) => {
+    console.error("Erro ao carregar o frontend:", err);
+  });
+
+  // 🚀 Forçar recarregamento se o frontend falhar
+  mainWindow.webContents.on("did-fail-load", () => {
+    console.log("Falha ao carregar o frontend, recarregando...");
+    mainWindow?.webContents.reload();
+  });
 
   mainWindow.on("closed", () => {
     mainWindow = null;
