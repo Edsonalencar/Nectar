@@ -4,7 +4,7 @@ import { Flex, Form, Modal, Typography } from "antd";
 
 import { LoadingContent } from "@/components/atoms/LoadingContent";
 
-import { Beekeeper, Job } from "@/types/entitysType";
+import { Job } from "@/types/entitysType";
 import { CreateJobDTO, PostProcessingDTO } from "@/services/JobsService/dtos";
 import { JobsService } from "@/services/JobsService/service";
 import { JobForm } from "@/components/organisms/JobForm";
@@ -30,6 +30,7 @@ export const CreateJobsModal = ({
   const [loading, setLoading] = useState<boolean>(false);
   const [form] = Form.useForm<CreateJobDTO>();
   const [postProcessingForm] = Form.useForm<PostProcessingDTO>();
+  const [weight, setWeight] = useState<number>(0);
 
   const create = async (data: CreateJobDTO) => {
     try {
@@ -79,6 +80,7 @@ export const CreateJobsModal = ({
   const closeModal = () => {
     form.resetFields();
     postProcessingForm.resetFields();
+    setWeight(0);
     onClose();
   };
 
@@ -98,6 +100,7 @@ export const CreateJobsModal = ({
         postProcessingResidue: initialData.postProcessingResidue,
       };
 
+      setWeight(initialData.weight ?? 0);
       postProcessingForm.setFieldsValue(postProcessingValue);
       form.setFieldsValue(formValue);
     }
@@ -121,15 +124,12 @@ export const CreateJobsModal = ({
       <LoadingContent isLoading={loading} />
 
       <Flex gap={15} vertical className="mt-5">
-        <JobForm form={form} />
+        <JobForm form={form} setWeight={setWeight} />
         <Typography.Title level={5}>
           Pós-processamento{" "}
           <span className="text-sm font-normal">(Opcional)</span>
         </Typography.Title>
-        <PostProcessingForm
-          form={postProcessingForm}
-          weight={form.getFieldValue("weight")}
-        />
+        <PostProcessingForm form={postProcessingForm} weight={weight} />
       </Flex>
     </Modal>
   );

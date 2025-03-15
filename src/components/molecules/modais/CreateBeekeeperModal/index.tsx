@@ -6,7 +6,6 @@ import { LoadingContent } from "@/components/atoms/LoadingContent";
 
 import { Beekeeper } from "@/types/entitysType";
 import { UserType } from "@/types";
-import { Profile } from "@/types/authTypes";
 import { AddressForm } from "@/components/organisms/AddressForm";
 import dayjs from "dayjs";
 import { validateFormIsEmpty } from "@/utils/validations";
@@ -59,8 +58,8 @@ export const CreateBeekeeperModal = ({
   };
 
   const submit = async () => {
-    const formValue = form.getFieldsValue();
-    const addressValue = addressForm.getFieldsValue();
+    const formValue = await form.validateFields();
+    const addressValue = await addressForm.validateFields();
 
     if (validateFormIsEmpty(addressValue.address)) {
       formValue.address = addressValue.address;
@@ -73,7 +72,6 @@ export const CreateBeekeeperModal = ({
 
     if (initialData?.id) update(initialData.id, formData);
     else create(formData);
-    closeModal();
   };
 
   const closeModal = () => {

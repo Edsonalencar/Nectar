@@ -43,15 +43,17 @@ export const BeekeeperDescription: React.FC<Props> = ({ data, tittle }) => {
       : []),
     {
       label: "Perca de enxames",
-      children: data.hasHiveLoss
-        ? booleanSerializer(data.hasHiveLoss)
-        : "Não informado",
+      children:
+        data.hasHiveLoss != undefined
+          ? booleanSerializer(data.hasHiveLoss)
+          : "Não informado",
     },
     {
       label: "Pesticida proximo",
-      children: data.hasPesticides
-        ? booleanSerializer(data.hasPesticides)
-        : "Não informado",
+      children:
+        data.hasPesticides != undefined
+          ? booleanSerializer(data.hasPesticides)
+          : "Não informado",
     },
     {
       label: "Cadastrado Em",

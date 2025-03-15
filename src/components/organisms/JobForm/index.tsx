@@ -1,8 +1,8 @@
 import { CreateJobDTO } from "@/services/JobsService/dtos";
 import { FormProps, Radio } from "antd";
 import { SelectSearchInput } from "@/components/atoms/Inputs/SelectSearchInput";
-import { booleanSelectOptions, produtcTypeOptions } from "@/utils/utils";
-import { Col, DatePicker, Form, Input, InputNumber, Row, Select } from "antd";
+import { produtcTypeOptions } from "@/utils/utils";
+import { Col, DatePicker, Form, Input, Row, Select } from "antd";
 import { useEffect, useState } from "react";
 import { Beekeeper } from "@/types/entitysType";
 import { handleError } from "@/utils/handleError";
@@ -10,9 +10,11 @@ import { BeekeepersService } from "@/services/beekeepersService/service";
 import { InputMoney } from "@/components/atoms/Inputs/InputMoney";
 import TextArea from "antd/es/input/TextArea";
 
-interface JobFormProps extends FormProps<CreateJobDTO> {}
+interface JobFormProps extends FormProps<CreateJobDTO> {
+  setWeight?: (value: number) => void;
+}
 
-export const JobForm = ({ ...rest }: JobFormProps) => {
+export const JobForm = ({ setWeight, ...rest }: JobFormProps) => {
   const [beekeepers, setBeekeepers] = useState<Beekeeper[]>([]);
 
   const fetchBeekeepers = async () => {
@@ -149,7 +151,11 @@ export const JobForm = ({ ...rest }: JobFormProps) => {
               },
             ]}
           >
-            <InputMoney placeholder="Peso total recebido" unit="Kg" />
+            <InputMoney
+              placeholder="Peso total recebido"
+              unit="Kg"
+              onChange={(value) => value && setWeight?.(Number(value))}
+            />
           </Form.Item>
         </Col>
       </Row>
