@@ -34,7 +34,7 @@ export const CreateBeekeeperModal = ({
   const create = async (data: UserType) => {
     try {
       setLoading(true);
-      const res = await BeekeepersService.create(data);
+      await BeekeepersService.create(data);
       if (reload) await reload();
       closeModal();
     } catch (error) {

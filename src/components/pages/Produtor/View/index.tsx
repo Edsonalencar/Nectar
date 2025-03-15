@@ -2,7 +2,6 @@ import { BasePagination } from "@/components/atoms/BasePagination";
 import { LoadingContent } from "@/components/atoms/LoadingContent";
 import { ToBack } from "@/components/atoms/ToBack";
 import { AddressDescription } from "@/components/molecules/Descriptions/AddressDescription";
-import { ProfileWitchEmailDescription } from "@/components/molecules/Descriptions/ProfileWitchEmailDescription";
 import { CreateBeekeeperModal } from "@/components/molecules/modais/CreateBeekeeperModal";
 import { CreateJobsModal } from "@/components/molecules/modais/CreateJobsModal";
 import { PostProcessingModal } from "@/components/molecules/modais/PostProcessingModal";

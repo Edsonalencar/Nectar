@@ -36,7 +36,7 @@ export const CreateJobsModal = ({
   const create = async (data: CreateJobDTO) => {
     try {
       setLoading(true);
-      const res = JobsService.create(data);
+      await JobsService.create(data);
       if (reload) await reload();
       closeModal();
     } catch (error) {

@@ -1,4 +1,4 @@
-import { FormProps, Select, Switch } from "antd";
+import { FormProps, Select } from "antd";
 import { Col, Form, Input, Row } from "antd";
 import { InputCpf } from "@/components/atoms/Inputs/InputCpf";
 import { InputPhone } from "@/components/atoms/Inputs/InputPhone";

@@ -9,7 +9,7 @@ export const InputCpfCnpj: FC<InputProps> = ({ onChange, ...rest }) => {
     <Input
       {...rest}
       onChange={(event) => {
-        event.target.value = formatCpfCnpj(event.target?.value ?? '');
+        event.target.value = formatCpfCnpj(event.target?.value ?? '') ?? '';
 
         if (!onChange) return;
         onChange(event);
