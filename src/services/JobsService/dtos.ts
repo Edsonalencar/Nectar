@@ -7,11 +7,6 @@ export interface CreateJobDTO {
   appearance: string; // Aparência
   scent: string; // Cheiro
   color: string; // Cor
-
-  pesticides: boolean; // Pesticidas
-  hiveLoss: boolean; // Perda de enxame
-
-  quantityOfBales: number; // Quantidade de fardos
   weight: number;
   beekeeperId: string;
   startAt: string | Date | Dayjs;
@@ -22,10 +17,10 @@ export interface CreateJobDTO {
 }
 
 export interface PostProcessingDTO {
-  postProcessingBales?: number; // Quantidade de fardos pós-processamento
-  postProcessingWeight?: number; // Peso total pós-processamento
-  postProcessingRevenue?: number; // Arrecadado
-  waste?: number; // Peso desperdiçado
+  postProcessingWeight?: number;
+  postProcessingRevenue?: number;
+  postProcessingDelivered?: number;
+  postProcessingResidue?: number;
 }
 
 export enum JobsStatusFilter {

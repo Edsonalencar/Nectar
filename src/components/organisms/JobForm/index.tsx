@@ -119,31 +119,7 @@ export const JobForm = ({ ...rest }: JobFormProps) => {
             <Input placeholder="Aparência do produto" />
           </Form.Item>
         </Col>
-        <Col span={24} md={{ span: 6 }}>
-          <Form.Item
-            label="Pesticidas"
-            name={"pesticides"}
-            key={"pesticides"}
-            id="pesticides"
-            initialValue={false}
-          >
-            <Select options={booleanSelectOptions} />
-          </Form.Item>
-        </Col>
-        <Col span={24} md={{ span: 6 }}>
-          <Form.Item
-            label="Perda de enxame"
-            name={"hiveLoss"}
-            key={"hiveLoss"}
-            id="hiveLoss"
-            initialValue={false}
-          >
-            <Select options={booleanSelectOptions} />
-          </Form.Item>
-        </Col>
-      </Row>
 
-      <Row gutter={[16, 16]}>
         <Col span={24} md={{ span: 6 }}>
           <Form.Item
             label="Cheiro"
@@ -158,26 +134,6 @@ export const JobForm = ({ ...rest }: JobFormProps) => {
             ]}
           >
             <Input placeholder="Cheiro do produto" />
-          </Form.Item>
-        </Col>
-        <Col span={24} md={{ span: 6 }}>
-          <Form.Item
-            label="Quantidade de fardos"
-            name={"quantityOfBales"}
-            key={"quantityOfBales"}
-            id="quantityOfBales"
-            rules={[
-              {
-                required: true,
-                message: "Campo obrigatório!",
-              },
-            ]}
-          >
-            <InputNumber
-              min={0}
-              style={{ width: "100%" }}
-              placeholder="Qtd. Fardos recebidos"
-            />
           </Form.Item>
         </Col>
         <Col span={24} md={{ span: 6 }}>
@@ -197,6 +153,7 @@ export const JobForm = ({ ...rest }: JobFormProps) => {
           </Form.Item>
         </Col>
       </Row>
+
       <Form.Item
         label="Cor"
         name={"color"}

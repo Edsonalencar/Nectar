@@ -1,27 +1,7 @@
 {
-  "compilerOptions": {
-    "module": "CommonJS",
-    "target": "ESNext",
-    "strict": true,
-    "esModuleInterop": true,
-    "outDir": "dist",
-    "skipLibCheck": true,
-    "rootDir": "./src",
-    "baseUrl": "./src",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "jsx": "react-jsx",
-    "paths": {
-      "*": ["node_modules/*"]
-    },
-    "types": ["node", "jest"]
-  },
-  "include": ["src/**/*"],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "src/backend/tests",
-    "**/*.spec.ts",
-    "**/*.e2e-spec.ts"
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
   ]
 }

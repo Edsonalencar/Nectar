@@ -1,4 +1,5 @@
 import { Address, UserStatus } from "@/types/authTypes";
+import { Dayjs } from "dayjs";
 
 export interface GetJobPageDTO {
   pageSize?: number; // Defaults to 10
@@ -6,11 +7,13 @@ export interface GetJobPageDTO {
 }
 
 export interface CreateBeekeeperDTO {
-  status?: UserStatus; // Defaults to UserStatus.ACTIVE
+  status?: UserStatus;
+  hasPesticides: boolean;
+  hasHiveLoss: boolean;
   name: string;
   email: string;
-  document: string; // Documento de identificação
+  document: string;
   phone: string;
-  birthDate: string; // ISO date format (yyyy-MM-dd)
-  address?: Address; // Optional or null
+  birthDate: string | Dayjs;
+  address?: Address;
 }

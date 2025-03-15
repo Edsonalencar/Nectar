@@ -5,8 +5,6 @@ import { Flex, Form, Modal, Typography } from "antd";
 import { LoadingContent } from "@/components/atoms/LoadingContent";
 
 import { Beekeeper } from "@/types/entitysType";
-import { ManagerService } from "@/services/managerService/service";
-import { UserForm } from "@/components/organisms/UserForm";
 import { UserType } from "@/types";
 import { Profile } from "@/types/authTypes";
 import { AddressForm } from "@/components/organisms/AddressForm";
@@ -14,6 +12,8 @@ import dayjs from "dayjs";
 import { validateFormIsEmpty } from "@/utils/validations";
 import { cleanMask } from "@/utils/formaters/format";
 import { BeekeepersService } from "@/services/beekeepersService/service";
+import { BeekeeperForm } from "@/components/organisms/BeekeeperForm";
+import { CreateBeekeeperDTO } from "@/services/beekeepersService/dtos";
 
 export interface Props {
   isOpen: boolean;
@@ -29,7 +29,7 @@ export const CreateBeekeeperModal = ({
   reload,
 }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [form] = Form.useForm<Profile>();
+  const [form] = Form.useForm<CreateBeekeeperDTO>();
   const [addressForm] = Form.useForm();
 
   const create = async (data: UserType) => {
@@ -85,9 +85,9 @@ export const CreateBeekeeperModal = ({
   useEffect(() => {
     if (initialData && isOpen) {
       const formValue = {
+        ...initialData,
         ...initialData.profile,
         birthDate: dayjs(initialData.profile?.birthDate),
-        email: initialData.email,
       };
 
       form.setFieldsValue(formValue);
@@ -112,7 +112,7 @@ export const CreateBeekeeperModal = ({
 
       <Flex gap={15} vertical className="mt-5">
         <Typography.Title level={5}>Dados Pessoais</Typography.Title>
-        <UserForm form={form} />
+        <BeekeeperForm form={form} />
         <Typography.Title level={5}>
           Endereço <span className="text-sm font-normal">(Opcional)</span>
         </Typography.Title>

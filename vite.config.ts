@@ -5,8 +5,10 @@ import path from "path";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: "./",
   build: {
-    outDir: "../../dist/frontend", // Gera o build na pasta dist
+    outDir: "./dist",
+    emptyOutDir: true,
   },
   server: {
     port: 3000, // Certifique-se de que está na porta correta

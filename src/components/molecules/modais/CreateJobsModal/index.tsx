@@ -67,15 +67,8 @@ export const CreateJobsModal = ({
     };
 
     if (validateFormIsEmpty(postProcessingValue)) {
-      const postProcessing = {
-        ...postProcessingValue,
-        postProcessingWeight: postProcessingValue.postProcessingWeight!!,
-        postProcessingRevenue:
-          postProcessingValue.postProcessingRevenue!!,
-        waste: postProcessingValue.waste!! ,
-      };
-
-      formValue.postProcessing = postProcessing;
+      console.log("postProcessingValue", postProcessingValue);
+      formValue.postProcessing = postProcessingValue;
     }
 
     if (initialData?.id) update(initialData.id, formValue);
@@ -99,10 +92,10 @@ export const CreateJobsModal = ({
       };
 
       const postProcessingValue: PostProcessingDTO = {
-        postProcessingBales: initialData?.postProcessingBales!!,
-        postProcessingWeight: initialData?.postProcessingWeight!!,
-        postProcessingRevenue: initialData?.postProcessingRevenue!!,
-        waste: initialData?.waste!!,
+        postProcessingWeight: initialData.postProcessingWeight,
+        postProcessingRevenue: initialData.postProcessingRevenue,
+        postProcessingDelivered: initialData.postProcessingDelivered,
+        postProcessingResidue: initialData.postProcessingResidue,
       };
 
       postProcessingForm.setFieldsValue(postProcessingValue);
@@ -133,7 +126,10 @@ export const CreateJobsModal = ({
           Pós-processamento{" "}
           <span className="text-sm font-normal">(Opcional)</span>
         </Typography.Title>
-        <PostProcessingForm form={postProcessingForm} />
+        <PostProcessingForm
+          form={postProcessingForm}
+          weight={form.getFieldValue("weight")}
+        />
       </Flex>
     </Modal>
   );

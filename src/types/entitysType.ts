@@ -20,19 +20,14 @@ export interface Job {
   appearance: string; // Aparência
   scent: string; // Cheiro
   color: string; // Cor
-
-  pesticides: boolean; // Pesticidas
-  hiveLoss: boolean; // Perda de enxame
-
-  quantityOfBales: number; // Quantidade de fardos
-  weight: number; // Peso total
   startAt: string;
+  weight: number; // Peso total
 
-  postProcessingBales?: number; // Quantidade de fardos pós-processamento
-  postProcessingWeight?: number; // Peso total pós-processamento
-  postProcessingRevenue?: number; // Arrecadado
-  waste?: number; // Peso desperdiçado
-  wasteRate?: number; // Taxa de desperdício
+  postProcessingWeight?: number;
+  postProcessingRevenue?: number;
+  postProcessingDelivered?: number;
+  postProcessingResidue?: number;
+  residueRate?: number; // Taxa de desperdício
 
   observation?: string; // Observações
 
@@ -50,6 +45,8 @@ export interface Beekeeper {
   id?: string; // UUID, gerado automaticamente se não fornecido
   status: UserStatus; // Status do usuário, padrão UserStatus.ACTIVE
   email?: string; // Email pode ser opcional ou nulo
+  hasPesticides: boolean;
+  hasHiveLoss: boolean;
   profile?: Profile; // Relacionamento com Profile
   owner?: User; // ID do proprietário, referência para User
   org?: User; // ID da organização, referência para User
