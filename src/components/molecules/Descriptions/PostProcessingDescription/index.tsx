@@ -1,4 +1,5 @@
 import { PostProcessingDTO } from "@/services/JobsService/dtos";
+import { longToKg } from "@/utils/utils";
 import { Descriptions } from "antd";
 import { DescriptionsProps } from "antd/lib";
 
@@ -11,32 +12,20 @@ export const PostProcessingDescription: React.FC<
 > = ({ postProcessing }) => {
   const items: DescriptionsProps["items"] = [
     {
-      label: "Fardos Pós-Processamento",
-      children: `${
-        postProcessing.postProcessingBales !== undefined &&
-        postProcessing.postProcessingBales
-      }`,
-    },
-    {
       label: "Peso Pós-Processamento",
-      children: `${
-        postProcessing.postProcessingWeight !== undefined &&
-        (postProcessing.postProcessingWeight / 100).toFixed(2)
-      } kg`,
+      children: longToKg(postProcessing.postProcessingWeight),
     },
     {
       label: "Arrecadado",
-      children: `${
-        postProcessing.postProcessingRevenue !== undefined &&
-        (postProcessing.postProcessingRevenue / 100).toFixed(2)
-      } kg`,
+      children: longToKg(postProcessing.postProcessingRevenue),
     },
     {
-      label: "Peso Desperdiçado",
-      children: `${
-        postProcessing.waste !== undefined &&
-        (postProcessing.waste / 100).toFixed(2)
-      } kg`,
+      label: "Peso Entregue",
+      children: longToKg(postProcessing.postProcessingDelivered),
+    },
+    {
+      label: "Peso Resíduo",
+      children: longToKg(postProcessing.postProcessingResidue),
     },
   ];
 
@@ -44,7 +33,7 @@ export const PostProcessingDescription: React.FC<
     <Descriptions
       title="Pós-Processamento"
       layout="vertical"
-      column={{ xxl: 4, xl: 3, lg: 2, md: 1, sm: 1, xs: 1 }}
+      column={{ xxl: 4, xl: 4, lg: 3, md: 1, sm: 1, xs: 1 }}
       items={items}
       labelStyle={{ color: "black" }}
       contentStyle={{ color: "gray" }}

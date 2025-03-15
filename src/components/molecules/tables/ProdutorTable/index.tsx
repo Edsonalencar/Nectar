@@ -33,14 +33,14 @@ export const ProdutorTable = ({
       title: "Nome",
       dataIndex: "nome",
       key: "nome",
-      render: (_, { profile, id, status }) => (
+      render: (_, item) => (
         <Typography.Link
           className=" w-full truncate flex items-center gap-2"
-          title={profile?.name}
-          onClick={() => onView?.({ id, status })}
+          title={item.profile?.name}
+          onClick={() => onView?.(item)}
         >
-          {profile?.name}
-          <UserStatusTag status={status} />
+          {item.profile?.name}
+          <UserStatusTag status={item.status} />
         </Typography.Link>
       ),
     },

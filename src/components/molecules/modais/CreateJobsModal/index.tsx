@@ -11,6 +11,7 @@ import { JobForm } from "@/components/organisms/JobForm";
 import { PostProcessingForm } from "@/components/organisms/PostProcessingForm";
 import { validateFormIsEmpty } from "@/utils/validations";
 import dayjs from "dayjs";
+import { floatToLong, longToFloat } from "@/utils/utils";
 
 export interface Props {
   isOpen: boolean;
@@ -64,12 +65,26 @@ export const CreateJobsModal = ({
 
     const formValue = {
       ...data,
-      weight: data.weight,
+      weight: floatToLong(data.weight),
     };
 
     if (validateFormIsEmpty(postProcessingValue)) {
-      console.log("postProcessingValue", postProcessingValue);
-      formValue.postProcessing = postProcessingValue;
+      const processingValues: PostProcessingDTO = {
+        postProcessingWeight: floatToLong(
+          postProcessingValue.postProcessingWeight
+        ),
+        postProcessingRevenue: floatToLong(
+          postProcessingValue.postProcessingRevenue
+        ),
+        postProcessingDelivered: floatToLong(
+          postProcessingValue.postProcessingDelivered
+        ),
+        postProcessingResidue: floatToLong(
+          postProcessingValue.postProcessingResidue
+        ),
+      };
+
+      formValue.postProcessing = processingValues;
     }
 
     if (initialData?.id) update(initialData.id, formValue);
@@ -88,19 +103,21 @@ export const CreateJobsModal = ({
     if (initialData && isOpen) {
       const formValue: CreateJobDTO = {
         ...initialData,
-        weight: initialData.weight!!,
+        weight: longToFloat(initialData.weight),
         beekeeperId: initialData.beekeeper?.id!!,
         startAt: dayjs(initialData.startAt!!),
       };
 
       const postProcessingValue: PostProcessingDTO = {
-        postProcessingWeight: initialData.postProcessingWeight,
-        postProcessingRevenue: initialData.postProcessingRevenue,
-        postProcessingDelivered: initialData.postProcessingDelivered,
-        postProcessingResidue: initialData.postProcessingResidue,
+        postProcessingWeight: longToFloat(initialData.postProcessingWeight),
+        postProcessingRevenue: longToFloat(initialData.postProcessingRevenue),
+        postProcessingDelivered: longToFloat(
+          initialData.postProcessingDelivered
+        ),
+        postProcessingResidue: longToFloat(initialData.postProcessingResidue),
       };
 
-      setWeight(initialData.weight ?? 0);
+      setWeight(longToFloat(initialData.weight));
       postProcessingForm.setFieldsValue(postProcessingValue);
       form.setFieldsValue(formValue);
     }

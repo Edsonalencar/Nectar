@@ -2,7 +2,6 @@ import { PostProcessingDTO } from "@/services/JobsService/dtos";
 import { FormProps } from "antd";
 import { Col, Form, Row } from "antd";
 import { InputMoney } from "@/components/atoms/Inputs/InputMoney";
-import { useEffect } from "react";
 
 interface Props extends FormProps<PostProcessingDTO> {
   isRequired?: boolean;
@@ -10,23 +9,23 @@ interface Props extends FormProps<PostProcessingDTO> {
 }
 
 export const PostProcessingForm = ({
-  weight = 5,
+  weight,
   isRequired = false,
+  form,
   ...rest
 }: Props) => {
-  const [form] = Form.useForm<PostProcessingDTO>();
+  const [baseForm] = Form.useForm<PostProcessingDTO>();
+  const postProcessingForm = form ? form : baseForm;
 
-  useEffect(() => {
-    form.setFieldsValue({ postProcessingWeight: weight });
-  }, [weight, form]);
+  const handleResidueChange = (value: number) => {
+    if (weight === 0) return;
 
-  const handleResidueChange = (value?: string | null | number) => {
     if (value !== null && value !== undefined && weight !== undefined) {
       const postProcessingWeight = weight - Number(value); // Total depois de remover o resíduo
       const postProcessingRevenue = postProcessingWeight * 0.2;
       const postProcessingDelivered = postProcessingWeight * 0.8;
 
-      form.setFieldsValue({
+      postProcessingForm.setFieldsValue({
         postProcessingWeight,
         postProcessingRevenue,
         postProcessingDelivered,
@@ -35,7 +34,7 @@ export const PostProcessingForm = ({
   };
 
   return (
-    <Form layout="vertical" form={form} {...rest}>
+    <Form layout="vertical" form={postProcessingForm} {...rest}>
       <Row gutter={[16, 16]}>
         <Col span={24} md={{ span: 6 }}>
           <Form.Item
@@ -54,13 +53,13 @@ export const PostProcessingForm = ({
               placeholder="00,00"
               unit="Kg"
               style={{ width: "100%" }}
-              onChange={handleResidueChange}
+              onChange={(value) => value && handleResidueChange(Number(value))}
             />
           </Form.Item>
         </Col>
         <Col span={24} md={{ span: 6 }}>
           <Form.Item
-            label="Total processado"
+            label="Total limpo"
             name="postProcessingWeight"
             key="postProcessingWeight"
           >
@@ -88,7 +87,7 @@ export const PostProcessingForm = ({
         </Col>
         <Col span={24} md={{ span: 6 }}>
           <Form.Item
-            label="Total entregue"
+            label="Para o produtor"
             name="postProcessingDelivered"
             key="postProcessingDelivered"
           >

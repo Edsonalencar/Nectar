@@ -7,6 +7,7 @@ import { productTypeSerialize } from "@/utils/serializers";
 import { JobStatusTag } from "@/components/atoms/JobStatusTag";
 import { useMemo } from "react";
 import { UserStatusTag } from "@/components/atoms/UserStatusTag";
+import { longToKg } from "@/utils/utils";
 
 interface Props extends TableProps<Job> {
   onEdit?: (job: Job) => void;
@@ -65,9 +66,7 @@ export const JobsTable = ({
         dataIndex: "weight",
         key: "weight",
         render: (_, { weight, postProcessingWeight }) =>
-          `${weight}Kg /${
-            postProcessingWeight ? postProcessingWeight : 0
-          }Kg`,
+          `${longToKg(weight)} / ${longToKg(postProcessingWeight)}`,
       },
       {
         title: "Status",
@@ -80,13 +79,14 @@ export const JobsTable = ({
         dataIndex: "postProcessingRevenue",
         key: "postProcessingRevenue",
         render: (_, { postProcessingRevenue }) =>
-          (postProcessingRevenue ? postProcessingRevenue : 0) + "Kg",
+          longToKg(postProcessingRevenue),
       },
       {
         title: "Perdido",
         dataIndex: "waste",
         key: "waste",
-        render: (_, { waste }) => (waste ? waste : 0) + "Kg",
+        render: (_, { postProcessingResidue }) =>
+          longToKg(postProcessingResidue),
       },
       {
         title: "Ações",

@@ -167,3 +167,19 @@ export const waxColorSchema: Map = {
   G: "#814D1B", // Mel Escuro
   H: "#5A3214", // Mel Muito Escuro
 };
+
+export const longToFloat = (value?: number) => {
+  if (!value) return 0;
+  return value / 100;
+};
+
+export const floatToLong = (value?: number) => {
+  if (!value) return 0;
+  return value * 100;
+};
+
+export const longToKg = (value?: number): string => {
+  if (!value) return `0 kg`;
+  const kg = longToFloat(value);
+  return `${kg} kg`;
+};

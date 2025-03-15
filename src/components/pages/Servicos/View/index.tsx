@@ -63,14 +63,14 @@ export const ViewJobPage: React.FC = () => {
           />
         </Card>
 
-        {resource?.postProcessingBales && (
+        {resource?.postProcessingResidue && (
           <Card>
             <PostProcessingDescription
               postProcessing={{
-                postProcessingBales: resource?.postProcessingBales,
-                postProcessingRevenue: resource?.postProcessingRevenue,
-                postProcessingWeight: resource?.postProcessingWeight,
-                waste: resource?.waste,
+                postProcessingWeight: resource.postProcessingWeight,
+                postProcessingRevenue: resource.postProcessingRevenue,
+                postProcessingDelivered: resource.postProcessingDelivered,
+                postProcessingResidue: resource.postProcessingResidue,
               }}
             />
           </Card>

@@ -6,6 +6,7 @@ import { Job } from "@/types/entitysType";
 import { CreateJobDTO, PostProcessingDTO } from "@/services/JobsService/dtos";
 import { JobsService } from "@/services/JobsService/service";
 import { PostProcessingForm } from "@/components/organisms/PostProcessingForm";
+import { floatToLong } from "@/utils/utils";
 
 export interface Props {
   isOpen: boolean;
@@ -41,10 +42,18 @@ export const PostProcessingModal = ({
     const postProcessingValue = await postProcessingForm.validateFields();
 
     const postProcessing: PostProcessingDTO = {
-      postProcessingBales: postProcessingValue?.postProcessingBales!!,
-      postProcessingWeight: postProcessingValue?.postProcessingWeight!! * 100,
-      postProcessingRevenue: postProcessingValue?.postProcessingRevenue!! * 100,
-      waste: postProcessingValue?.waste!! * 100,
+      postProcessingWeight: floatToLong(
+        postProcessingValue.postProcessingWeight
+      ),
+      postProcessingRevenue: floatToLong(
+        postProcessingValue.postProcessingRevenue
+      ),
+      postProcessingDelivered: floatToLong(
+        postProcessingValue.postProcessingDelivered
+      ),
+      postProcessingResidue: floatToLong(
+        postProcessingValue.postProcessingResidue
+      ),
     };
 
     const formValue: CreateJobDTO = {
@@ -75,7 +84,11 @@ export const PostProcessingModal = ({
     >
       <div className="mt-6">
         <LoadingContent isLoading={loading} />
-        <PostProcessingForm form={postProcessingForm} isRequired />
+        <PostProcessingForm
+          form={postProcessingForm}
+          isRequired
+          weight={initialData?.weight}
+        />
       </div>
     </Modal>
   );

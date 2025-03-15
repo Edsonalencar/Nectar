@@ -5,6 +5,7 @@ import { ItensGraph, MonthlyBoard } from "@/services/dashboarService/dtos";
 import { DashboarService } from "@/services/dashboarService/service";
 import { Pageable } from "@/types";
 import { Beekeeper, Job } from "@/types/entitysType";
+import { longToFloat } from "@/utils/utils";
 import { Card, Col, Flex, Radio, Row, Statistic, Typography } from "antd";
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
@@ -136,8 +137,8 @@ export const DashboardPage: React.FC = () => {
         <Col span={24} md={{ span: 6 }}>
           <Card>
             <Statistic
-              title="Cota de cera"
-              value={resourceBoard?.revenue || 0}
+              title="Arrecadado"
+              value={longToFloat(resourceBoard?.revenue)}
               suffix="Kg"
             />
           </Card>
